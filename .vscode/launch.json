@@ -1,0 +1,28 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run Server",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "main:app"
+            ],
+            "jinja": true,
+            "justMyCode": true
+        },
+        {
+            "name": "Run Pytest",
+            "type": "python",
+            "request": "launch",
+            "module": "pytest",
+            "args": [
+                "tests"
+            ],
+            "purpose": ["debug-test"],
+            "console": "integratedTerminal",
+            "justMyCode": false
+        }  
+    ]
+}

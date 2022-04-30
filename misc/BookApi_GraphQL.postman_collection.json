@@ -1,0 +1,382 @@
+{
+	"info": {
+		"_postman_id": "9385d05f-51cf-44d9-9dde-f50b01be91e5",
+		"name": "BookApi_GraphQL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Queries",
+			"item": [
+				{
+					"name": "getBookById",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-bookapi-token",
+								"value": "fake-token-value123",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query BookQuery {\n  getBookById(bookId: \"626cb11bc75c71bdd31281f7\") {\n    result {\n      Id\n      asyncUpdateRequired\n      author {\n        firstName\n        lastName\n      }\n      bookFormat\n      description\n      isbn\n      lastUpdatedOn\n      price\n      rating\n      subtitle\n      title\n    }\n    errorMessage\n    success\n  }\n}\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/graph/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"graph",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getBookByIsbn",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-bookapi-token",
+								"value": "fake-token-value123",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query BookQuery {\n  getBookByIsbn(isbn: \"1234567891278\") {\n    errorMessage\n    result {\n      Id\n      author {\n        firstName\n        lastName\n      }\n      bookFormat\n      description\n      isbn\n      lastUpdatedOn\n      createdOn\n      price\n      subtitle\n      title\n      rating\n    }\n  }\n}\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/graph/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"graph",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getReviewById",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-bookapi-token",
+								"value": "fake-token-value123",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query ReviewQuery {\n  __typename\n  getReviewById(reviewId: \"626cb2e1c75c71bdd31281fb\") {\n    errorMessage\n    success\n    result {\n      Id\n      rating\n      bookId\n      createdOn\n    }\n  }\n}\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/graph/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"graph",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getReviewByBookId",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-bookapi-token",
+								"value": "fake-token-value123",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query ReviewQuery {\n  __typename\n  getReviewByBookId(bookId: \"626cb11bc75c71bdd31281f7\") {\n    errorMessage\n    success\n    result {\n      Id\n      rating\n      bookId\n      createdOn\n    }\n  }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/graph/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"graph",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mutations",
+			"item": [
+				{
+					"name": "createBook",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-bookapi-token",
+								"value": "fake-token-value123",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation BookMutation {\n  __typename\n  createBook(author: {firstName: \"Jane\", \n    lastName: \"Doe\", middleName: \"\"}, \n    bookFormat: \"EBOOK\", \n    description: \"This is a test book\", \n    isbn: \"1234567891278\", price: 16.99, \n    subtitle: \"The best test book\", title: \"Epic FastAPI Book\") {\n    errorMessage\n    recordId\n    result {\n        title\n        subtitle\n        author {\n            firstName\n            lastName\n        }\n        price\n        bookFormat\n    } \n  }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/graph/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"graph",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteBook",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-bookapi-token",
+								"value": "fake-token-value123",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation BookMutation {\n  __typename\n  deleteBook(bookId: \"626cb11bc75c71bdd31281f7\") {\n    success\n    recordId\n    errorMessage\n  }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/graph/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"graph",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateBook",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-bookapi-token",
+								"value": "fake-token-value123",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation BookMutation {\n  __typename\n  updateBook(\n    bookFormat: \"ebook\", \n    bookId: \"626cb11bc75c71bdd31281f7\") {\n    result {\n      title\n      bookFormat\n      lastUpdatedOn\n    }\n  }\n}\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/graph/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"graph",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateReview",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-bookapi-token",
+								"value": "fake-token-value123",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation ReviewMutation {\n  __typename\n  updateReview(rating: 4.6, reviewComments: \"Test\", \n    reviewId: \"626cbea60c37e888400eba47\") {\n    recordId\n    success\n    result {\n      rating\n    }\n  }\n}\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/graph/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"graph",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createReview",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-bookapi-token",
+								"value": "fake-token-value123",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation ReviewMutation {\n  __typename\n  createReview(bookId: \"626cb11bc75c71bdd31281f7\", rating: 3.5, reviewComments: \"This was cool\", reviewerId: \"EdyVision\") {\n    errorMessage\n    recordId\n    success\n    result {\n      rating\n      reviewComments\n      bookId\n    }\n  }\n}\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/graph/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"graph",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteReview",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-bookapi-token",
+								"value": "fake-token-value123",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation ReviewMutation {\n  __typename\n  deleteReview(reviewId: \"626cbea60c37e888400eba47\") {\n    recordId\n    errorMessage\n    success\n  }\n}\n",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/graph/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"graph",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mutation_CreateBook",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-bookapi-token",
+						"value": "fake-token-value123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation MyMutation {\n  __typename\n  createBook(author: {firstName: \"Eidan\", \n    lastName: \"Rosado\", middleName: \"\"}, \n    bookFormat: \"Paperback\", \n    description: \"test\", \n    isbn: \"123\", price: 16.99, \n    subtitle: \"test\", title: \"test\") {\n    errorMessage\n    recordId\n  }\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/graph/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"graph",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

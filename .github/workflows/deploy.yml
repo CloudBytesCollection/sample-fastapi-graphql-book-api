@@ -1,0 +1,73 @@
+name: Deploy to AWS
+
+on:
+  # This workflow is called after by the build workflow on successful completion of build step
+  workflow_run:
+    workflows: ["Build"]
+    types: [completed]
+    branches: [master]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  CDK_VERSION: 2.22.0
+  ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
+  DOMAIN_NAME: ${{secrets.DOMAIN_NAME}}
+  IMAGE_TAG: bookapi
+  ENV_TYPE: dev
+
+jobs:
+  deploy:
+    name: Build and Upload bookapi Image to AWS ECR
+    strategy:
+      matrix:
+        python-version: [ 3.9.12 ]
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Environment Setup
+        uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.9
+      - name: Install Global Dependencies
+        run: pip install -U pip && pip install poetry wheel
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "17.x"
+      - name: Install AWS CDK
+        run: npm i -g aws-cdk
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@master
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - run: poetry config virtualenvs.create false
+      - name: Install Project Dependencies
+        run: poetry env info && poetry install
+      - name: Login to AWS ECR
+        id: ecr-login
+        uses: aws-actions/amazon-ecr-login@v1
+      - name: Build Image and Deploy to ECR
+        env:
+          ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
+        run: |
+          docker build -t ${{env.IMAGE_TAG}} -f Dockerfile .
+          docker tag ${{env.IMAGE_TAG}}:latest ${{env.ECR_REPOSITORY}}
+          docker push ${{env.ECR_REPOSITORY}}:latest
+      - name: Deploy AWS Infrastructure Changes
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ACCOUNT: ${{ secrets.AWS_ACCOUNT }}
+        run: |
+          cdk bootstrap aws://${{env.AWS_ACCOUNT}}/${{env.AWS_REGION}}
+          cdk synth && cdk diff
+#          cdk deploy --require-approval never # uncomment this line to deploy to AWS
+        
+          

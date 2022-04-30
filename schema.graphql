@@ -1,0 +1,109 @@
+type Author {
+  firstName: String!
+  lastName: String!
+  middleName: String
+}
+
+input AuthorInput {
+  firstName: String!
+  lastName: String!
+  middleName: String!
+}
+
+type Book {
+  Id: ID!
+  title: String!
+  author: Author!
+  price: Float!
+  subtitle: String
+  description: String
+  isbn: String
+  bookFormat: String
+  rating: Float
+  asyncUpdateRequired: Boolean
+  createdOn: String
+  lastUpdatedOn: String
+}
+
+type BookCreateResponse {
+  errorMessage: String
+  success: Boolean!
+  result: Book
+  recordId: ID!
+}
+
+type BookDeleteResponse {
+  errorMessage: String
+  success: Boolean!
+  result: Book
+  recordId: ID!
+}
+
+type BookGetResponse {
+  errorMessage: String
+  success: Boolean!
+  result: Book
+}
+
+type BookUpdateResponse {
+  errorMessage: String
+  success: Boolean!
+  result: Book
+  recordId: ID!
+}
+
+"""Date with time (isoformat)"""
+scalar DateTime
+
+type Mutation {
+  createBook(title: String!, author: AuthorInput!, price: Float!, subtitle: String!, description: String!, isbn: String!, bookFormat: String!): BookCreateResponse!
+  updateBook(bookId: String!, title: String!, author: AuthorInput!, price: Float!, subtitle: String!, description: String!, isbn: String!, bookFormat: String!, rating: Float!): BookUpdateResponse!
+  deleteBook(bookId: String!): BookDeleteResponse!
+  createReview(bookId: String!, reviewerId: String!, rating: Float!, reviewComments: String!): ReviewCreateResponse!
+  updateReview(reviewId: String!, rating: Float!, reviewComments: String!): ReviewUpdateResponse!
+  deleteReview(reviewId: String!): ReviewDeleteResponse!
+}
+
+type Query {
+  getBookById(bookId: String!): BookGetResponse!
+  getBookByIsbn(isbn: String!): BookGetResponse!
+  getReviewById(reviewId: String!): ReviewGetResponse!
+  getReviewByBookId(bookId: String!): ReviewGetResponse!
+}
+
+type Review {
+  Id: ID!
+  bookId: String!
+  reviewerId: String!
+  rating: Float!
+  reviewComments: String!
+  createdOn: DateTime!
+  lastUpdatedOn: DateTime
+}
+
+type ReviewCreateResponse {
+  errorMessage: String
+  success: Boolean!
+  result: Review
+  recordId: ID!
+}
+
+type ReviewDeleteResponse {
+  errorMessage: String
+  success: Boolean!
+  result: Review
+  recordId: ID!
+}
+
+type ReviewGetResponse {
+  errorMessage: String
+  success: Boolean!
+  result: Review
+}
+
+type ReviewUpdateResponse {
+  errorMessage: String
+  success: Boolean!
+  result: Review
+  recordId: ID!
+}

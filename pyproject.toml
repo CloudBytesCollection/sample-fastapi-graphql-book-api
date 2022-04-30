@@ -1,0 +1,44 @@
+[tool.poetry]
+name = "book-api"
+version = "0.1.0"
+description = "A sample book api project using FastAPI and GraphQL"
+authors = ["Eidan J. Rosado"]
+
+[tool.poetry.dependencies]
+python = ">=3.9.7,<3.11"
+fastapi = "^0.70.1"
+uvicorn = "^0.17.6"
+gunicorn = "^20.1.0"
+pydantic = {extras = ["dotenv"], version = "^1.8.2"}
+gql = "~3.0.0.a4"
+fastapi-utils = "^0.2.1"
+strawberry-graphql = "^0.93.4"
+dataclasses-json = "^0.5.6"
+requests = "^2.26.0"
+pymongo= { version = "^3.12", extras = ["srv"] }
+motor = "2.5.1"
+"aws-cdk.core" = "^1.152.0"
+"aws-cdk.assertions" = "^1.152.0"
+"aws-cdk.aws-apigateway" = "^1.152.0"
+"aws-cdk.aws-ecr" = "^1.152.0"
+"aws-cdk.aws-ecs" = "^1.152.0"
+"aws-cdk.aws-ecs-patterns" = "^1.153.1"
+"aws-cdk.aws-secretsmanager" = "^1.153.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.1.1"
+pytest-asyncio = "^0.18.2"
+coverage = "^6.3.2"
+pylint = "^2.13.7"
+black = "22.3.0"
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+asyncio_mode = "auto"
+testpaths = [
+    "tests"
+]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
