@@ -41,7 +41,7 @@ DOMAIN_NAME='example.com'
 LOCAL_NETWORK_CIDR='YOUR_NETWORK_CIDR'
 ```
 
-The main entry point is main.py, so you can start that file from command line or use whatever execution method is available from your IDE. To install the IDE to interact with GraphQL, look in the SETUP.md for GraphQL Playground installation instructions then simply open the GraphQL Playground to interact with the local server and insert the base url http://127.0.0.1:8000/graph. For more detailed instructions, check the wiki.
+The main entry point is main.py, so you can start that file from command line or use whatever execution method is available from your IDE. To install the IDE to interact with GraphQL, look in the SETUP.md for GraphQL Playground installation instructions then simply open the GraphQL Playground to interact with the local server and insert the base url http://127.0.0.1:8000/graph.
 
 ## Dev Notes
 ### Viewing Changes
