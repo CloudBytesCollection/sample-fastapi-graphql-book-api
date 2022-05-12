@@ -31,8 +31,8 @@ jobs:
         run: poetry env info && poetry install
       - name: Run Tests
         run: |
-        poetry run coverage run -m pytest -v tests
-        poetry run coverage report -m --omit="*/test*,config/*.conf" --fail-under=70
+          poetry run coverage run -m pytest -v tests
+          poetry run coverage report -m --omit="*/test*,config/*.conf" --fail-under=70
       - name: Test Image Build
         env:
           IMAGE_TAG: bookapi
