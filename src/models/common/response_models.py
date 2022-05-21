@@ -34,7 +34,6 @@ class GetListResponse(Generic[T], BaseResponse):
 @strawberry.type
 class CreateResponse(Generic[T], BaseResponse):
     result: Optional[T]
-    record_id: strawberry.ID
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
@@ -42,7 +41,6 @@ class CreateResponse(Generic[T], BaseResponse):
 @strawberry.type
 class UpdateResponse(Generic[T], BaseResponse):
     result: Optional[T]
-    record_id: strawberry.ID
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)

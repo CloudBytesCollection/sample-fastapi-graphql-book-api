@@ -39,21 +39,21 @@ async def get_reviews_by_book_id(book_id: str) -> GetResponse[Review]:
 
 
 async def create_review(review: Review) -> CreateResponse[Review]:
+    new_review = review.to_dict()
     result: InsertOneResult = await db_client.create_record(
-        DatabaseCollectionTypes.REVIEWS.value, review.to_dict()
+        DatabaseCollectionTypes.REVIEWS.value, new_review
     )
 
     if result is None or result.inserted_id is None:
         review_response = CreateResponse[Review](
             result=None,
-            record_id=None,
             error_message="An error occurred during review creation.",
             success=False,
         )
     else:
+        new_review["_id"] = result.inserted_id
         review_response = CreateResponse[Review](
-            result=review,
-            record_id=result.inserted_id,
+            result=Review.from_dict(new_review),
             error_message=None,
             success=True,
         )
@@ -78,14 +78,12 @@ async def update_review(
     if result is None:
         review_response = UpdateResponse[Review](
             result=None,
-            record_id=None,
             error_message="An error occurred updating the review.",
             success=False,
         )
     else:
         review_response = UpdateResponse[Review](
             result=Review.from_dict(result),
-            record_id=result["_id"],
             error_message=None,
             success=True,
         )

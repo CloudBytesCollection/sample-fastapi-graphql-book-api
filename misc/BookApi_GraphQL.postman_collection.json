@@ -159,7 +159,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation BookMutation {\n  __typename\n  createBook(author: {firstName: \"Jane\", \n    lastName: \"Doe\", middleName: \"\"}, \n    bookFormat: \"EBOOK\", \n    description: \"This is a test book\", \n    isbn: \"1234567891278\", price: 16.99, \n    subtitle: \"The best test book\", title: \"Epic FastAPI Book\") {\n    errorMessage\n    recordId\n    result {\n        title\n        subtitle\n        author {\n            firstName\n            lastName\n        }\n        price\n        bookFormat\n    } \n  }\n}",
+								"query": "mutation BookMutation {\n  __typename\n  createBook(author: {firstName: \"Jane\", \n    lastName: \"Doe\", middleName: \"\"}, \n    bookFormat: \"EBOOK\", \n    description: \"This is a test book\", \n    isbn: \"1234567891278\", price: 16.99, \n    subtitle: \"The best test book\", title: \"Epic FastAPI Book\") {\n    errorMessage\n      result {\n        title\n        subtitle\n        author {\n            firstName\n            lastName\n        }\n        price\n        bookFormat\n    } \n  }\n}",
 								"variables": ""
 							}
 						},
@@ -258,7 +258,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation ReviewMutation {\n  __typename\n  updateReview(rating: 4.6, reviewComments: \"Test\", \n    reviewId: \"626cbea60c37e888400eba47\") {\n    recordId\n    success\n    result {\n      rating\n    }\n  }\n}\n",
+								"query": "mutation ReviewMutation {\n  __typename\n  updateReview(rating: 4.6, reviewComments: \"Test\", \n    reviewId: \"626cbea60c37e888400eba47\") {\n      success\n    result {\n      rating\n    }\n  }\n}\n",
 								"variables": ""
 							}
 						},
@@ -291,7 +291,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation ReviewMutation {\n  __typename\n  createReview(bookId: \"626cb11bc75c71bdd31281f7\", rating: 3.5, reviewComments: \"This was cool\", reviewerId: \"EdyVision\") {\n    errorMessage\n    recordId\n    success\n    result {\n      rating\n      reviewComments\n      bookId\n    }\n  }\n}\n",
+								"query": "mutation ReviewMutation {\n  __typename\n  createReview(bookId: \"626cb11bc75c71bdd31281f7\", rating: 3.5, reviewComments: \"This was cool\", reviewerId: \"EdyVision\") {\n    errorMessage\n       success\n    result {\n      rating\n      reviewComments\n      bookId\n    }\n  }\n}\n",
 								"variables": ""
 							}
 						},
@@ -359,7 +359,7 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "mutation MyMutation {\n  __typename\n  createBook(author: {firstName: \"Eidan\", \n    lastName: \"Rosado\", middleName: \"\"}, \n    bookFormat: \"Paperback\", \n    description: \"test\", \n    isbn: \"123\", price: 16.99, \n    subtitle: \"test\", title: \"test\") {\n    errorMessage\n    recordId\n  }\n}",
+						"query": "mutation MyMutation {\n  __typename\n  createBook(author: {firstName: \"Eidan\", \n    lastName: \"Rosado\", middleName: \"\"}, \n    bookFormat: \"Paperback\", \n    description: \"test\", \n    isbn: \"123\", price: 16.99, \n    subtitle: \"test\", title: \"test\") {\n    errorMessage\n     }\n}",
 						"variables": ""
 					}
 				},

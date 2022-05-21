@@ -89,7 +89,7 @@ async def test_create_book(mock_create_record):
     assert create_response.result.author.middle_name is None
     assert create_response.result.isbn == 9781234567812
     assert create_response.success is True
-    assert create_response.record_id is not None
+    assert create_response.result.id is not None
 
 
 @pytest.mark.asyncio
@@ -120,7 +120,7 @@ async def test_create_book_failure(mock_create_record):
 
     assert create_response is not None
     assert create_response.success is False
-    assert create_response.record_id is None
+    assert create_response.result is None
 
 
 @pytest.mark.asyncio
@@ -144,7 +144,6 @@ async def test_update_book(mock_update_record):
     assert update_response.result.author.last_name.__contains__("Author")
     assert update_response.result.author.middle_name is None
     assert update_response.success is True
-    assert update_response.record_id is not None
 
 
 @pytest.mark.asyncio

@@ -56,7 +56,7 @@ async def test_update_review(mock_update_record):
 
     assert update_response is not None
     assert update_response.success is True
-    assert update_response.record_id is not None
+    assert update_response.result.id is not None
 
 
 @pytest.mark.asyncio

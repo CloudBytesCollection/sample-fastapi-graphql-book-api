@@ -94,20 +94,20 @@ async def get_bulk_avg_reservation_rating_by_book_ids(
 
 
 async def create_book(book: Book) -> CreateResponse[Book]:
+    new_book = book.to_dict()
     result: InsertOneResult = await db_client.create_record(
-        DatabaseCollectionTypes.BOOKS.value, book.to_dict()
+        DatabaseCollectionTypes.BOOKS.value, new_book
     )
-
     if result is None or result.inserted_id is None:
         book_response = CreateResponse[Book](
             result=None,
-            record_id=None,
             error_message="An error occurred during book creation.",
             success=False,
         )
     else:
+        new_book["_id"] = result.inserted_id
         book_response = CreateResponse[Book](
-            result=book, record_id=result.inserted_id, error_message=None, success=True
+            result=Book.from_dict(new_book), error_message=None, success=True
         )
 
     return book_response
@@ -125,14 +125,12 @@ async def update_book(
     if result is None:
         book_response = UpdateResponse[Book](
             result=None,
-            record_id=None,
             error_message="An error occurred updating the book.",
             success=False,
         )
     else:
         book_response = UpdateResponse[Book](
             result=Book.from_dict(result),
-            record_id=result["_id"],
             error_message=None,
             success=True,
         )
