@@ -1,7 +1,5 @@
 FROM python:3.9.12-slim
 
-RUN pip install fastapi uvicorn
-
 # Install Environment Dependencies (Image Base)
 RUN pip install fastapi uvicorn poetry wheel virtualenv
 
