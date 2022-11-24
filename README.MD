@@ -1,4 +1,11 @@
 # Sample FastAPI + GraphQL Book API Project 
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+![](https://img.shields.io/badge/code%20style-black-000000.svg)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/EdyVision/pii-codex/graphs/commit-activity)
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+[![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-390/)
+
+
 A sample python book-api project using FastAPI and GraphQL. This project leverages docker for containerization and provides the full setup to deploy to AWS Fargate using AWS CDK. The starter is created for and used in the <a href="https://www.amazon.com/dp/B09Z7CSDRX">Building Serverless Python Apps Using FastAPI and AWS</a> book by <a href="https://eidanrosado.com">Eidan J. Rosado</a>.
 
 ### Running Services with Docker
