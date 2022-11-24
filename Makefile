@@ -53,6 +53,15 @@ run.container:
 stop.container:
 	@docker stop bookapi && docker rm bookapi
 
+version.bump.patch:
+	@poetry version patch
+
+version.bump.minor:
+	@poetry version minor
+
+version.bump.major:
+	@poetry version major
+
 cdk.synth:
 	@cdk synth --require-approval never
 

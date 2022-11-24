@@ -52,7 +52,8 @@ class ContainerizedGraphQLAPIStack(Stack):
         )
 
         # Uncomment the following to retrieve VPC from Name
-        # vpc = _ec2.Vpc.from_lookup(self, 'BookApiStackVPC', is_default=False)
+        # Hint: Look at VPC entries for details
+        # vpc = _ec2.Vpc.from_lookup(self, 'BookApiStackVPC', vpc_name="ExistingVPCName")
 
         # Add the interface for ECR
         vpc.add_interface_endpoint(
