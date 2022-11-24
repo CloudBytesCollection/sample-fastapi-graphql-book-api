@@ -1,5 +1,7 @@
 from constructs import Construct
 from aws_cdk import (
+    Stack,
+    Duration,
     aws_ec2 as _ec2,
     aws_ecs as _ecs,
     aws_ecs_patterns as _ecs_patterns,
@@ -9,7 +11,6 @@ from aws_cdk import (
     aws_route53_targets as _targets,
     aws_elasticloadbalancingv2 as _elasticloadbalancingv2,
 )
-from aws_cdk.core import Stack, Duration
 
 from src.config import settings
 

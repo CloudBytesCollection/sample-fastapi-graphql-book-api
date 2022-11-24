@@ -1,4 +1,4 @@
-from aws_cdk import core as cdk
+import aws_cdk as cdk
 
 from book_api_stack import ContainerizedGraphQLAPIStack
 

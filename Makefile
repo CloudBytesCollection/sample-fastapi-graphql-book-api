@@ -33,12 +33,6 @@ registry.login:
 registry.deploy:
 	@docker push $(AWS_ACCOUNT).dkr.ecr.$(AWS_REGION).amazonaws.com/book-api:latest
 
-registry.login:
-	@aws ecr get-login-password --region $(AWS_REGION) | docker login --username AWS --password-stdin $(AWS_ACCOUNT).dkr.ecr.$(AWS_REGION).amazonaws.com
-
-registry.deploy:
-	@docker push $(AWS_ACCOUNT).dkr.ecr.$(AWS_REGION).amazonaws.com/book-api:latest
-
 image.build:
 	./build-image.sh
 
