@@ -11,18 +11,15 @@ on:
   workflow_dispatch:
 
 env:
-  CDK_VERSION: 2.22.0
+  CDK_VERSION: 2.50.0
   ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
   DOMAIN_NAME: ${{secrets.DOMAIN_NAME}}
-  IMAGE_TAG: bookapi
+  IMAGE_NAME: bookapi
   ENV_TYPE: dev
 
 jobs:
   deploy:
     name: Build and Upload bookapi Image to AWS ECR
-    strategy:
-      matrix:
-        python-version: [ 3.9.12 ]
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
@@ -37,9 +34,9 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v2
         with:
-          node-version: "17.x"
+          node-version: "18.x"
       - name: Install AWS CDK
-        run: npm i -g aws-cdk
+        run: npm i -g aws-cdk@${{ env.CDK_VERSION }}
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@master
         with:
@@ -56,8 +53,8 @@ jobs:
         env:
           ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
         run: |
-          docker build -t ${{env.IMAGE_TAG}} -f Dockerfile .
-          docker tag ${{env.IMAGE_TAG}}:latest ${{env.ECR_REPOSITORY}}
+          docker build -t ${{env.IMAGE_NAME}} -f Dockerfile .
+          docker tag ${{env.IMAGE_NAME}}:latest ${{env.ECR_REPOSITORY}}
           docker push ${{env.ECR_REPOSITORY}}:latest
       - name: Deploy AWS Infrastructure Changes
         env:
