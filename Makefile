@@ -15,6 +15,9 @@ test.coverage:
 install:
 	@poetry install
 
+server.start:
+	@poetry run python3 main.py
+
 export.schema:
 	@strawberry export-schema src.graphql_api:schema > ./schema.graphql
 

@@ -12,12 +12,13 @@ gunicorn = "^20.1.0"
 pydantic = {extras = ["dotenv"], version = "^1.8.2"}
 gql = "~3.0.0.a4"
 fastapi-utils = "^0.2.1"
-strawberry-graphql = "^0.93.4"
 dataclasses-json = "^0.5.6"
 requests = "^2.26.0"
 pymongo= { version = "^3.12", extras = ["srv"] }
 motor = "2.5.1"
 aws-cdk-lib = "^2.51.1"
+graphdoc = "^0.3.1"
+strawberry-graphql = "^0.220.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.2.0"
