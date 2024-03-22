@@ -19,11 +19,11 @@ class DatabaseSettings(BaseSettings):
 class InfrastructureSettings(BaseSettings):
     AWS_ACCESS_KEY: str = ""
     AWS_SECRET_ACCESS_KEY: str = ""
-    AWS_ACCOUNT: str = "" # Your AWS Account #
-    AWS_REGION: str = "" # Example: us-east-1
-    ENV_TYPE: str = "Dev" # Examples: Dev, Staging, Prod
-    DOMAIN_NAME: str = "" # No www. Format Expected: example.com
-    LOCAL_NETWORK_CIDR: str = "" # CIDR Format Expected: 0.0.0.0/32
+    AWS_ACCOUNT: str = ""  # Your AWS Account #
+    AWS_REGION: str = ""  # Example: us-east-1
+    ENV_TYPE: str = "Dev"  # Examples: Dev, Staging, Prod
+    DOMAIN_NAME: str = ""  # No www. Format Expected: example.com
+    LOCAL_NETWORK_CIDR: str = ""  # CIDR Format Expected: 0.0.0.0/32
 
 
 class Settings(

@@ -42,7 +42,6 @@ unsafe-load-any-extension=no
 # --disable=W".
 disable=logging-fstring-interpolation,
         no-member,
-        unnecessary-dunder-call,
         raise-missing-from,
         import-error,
         missing-module-docstring,
@@ -310,8 +309,9 @@ logging-modules=logging
 [MISCELLANEOUS]
 
 # List of note tags to take in consideration, separated by a comma.
-notes=FIXME,
-      TODO
+notes=FIXME
+
+disable=useless-suppression,broad-exception-raised,superfluous-parens,broad-exception-caught,consider-using-with,consider-using-f-string,consider-using-generator,arguments-renamed,invalid-overridden-method,unspecified-encoding,use-implicit-booleaness-not-comparison,use-a-generator,duplicate-code,raise-missing-from,invalid-name,unnecessary-dunder-call,unnecessary-lambda-assignment,too-many-arguments,line-too-long,use-implicit-booleaness-not-len,dangerous-default-value,too-many-locals,too-many-public-methods,suppressed-message,arguments-differ,wildcard-import,locally-disabled,missing-module-docstring,no-value-for-parameter
 
 
 [SIMILARITIES]
@@ -405,4 +405,4 @@ valid-metaclass-classmethod-first-arg=cls
 
 # Exceptions that will emit a warning when being caught. Defaults to
 # "Exception".
-overgeneral-exceptions=Exception
+# overgeneral-exceptions=Exception

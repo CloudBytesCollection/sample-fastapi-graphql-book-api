@@ -15,11 +15,14 @@ test.coverage:
 install:
 	@poetry install
 
+server.start:
+	@poetry run python3 main.py
+
 export.schema:
 	@strawberry export-schema src.graphql_api:schema > ./schema.graphql
 
 lint:
-	@pylint app tests
+	@poetry run pylint app tests
 
 format.check:
 	@black . --check

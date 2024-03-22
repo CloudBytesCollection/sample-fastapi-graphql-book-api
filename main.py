@@ -1,11 +1,18 @@
 import datetime
+import graphdoc  # type: ignore
+import graphql
 import uvicorn
+from graphql import GraphQLSyntaxError
+from starlette.responses import Response
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from fastapi_utils.tasks import repeat_every
+from fastapi.middleware.cors import CORSMiddleware
+from pathlib import Path
+
 from src.config import settings
 from src.graphql_api import graphql_app
 from src.jobs.book_ratings_job import update_average_book_ratings
-from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 app.mount("/graph", graphql_app)
@@ -43,7 +50,42 @@ async def mass_update_book_ratings() -> None:
     await update_average_book_ratings()
 
 
+# Load static files (site template for docs, etc.)
+app.mount(
+    "/doc_templates",
+    StaticFiles(directory=Path(__file__).parent.absolute() / "./src/doc_templates"),
+    name="doc_templates",
+)
+
+
+@app.get("/graphql/docs", include_in_schema=False)
+async def get_graphql_docs():
+    """
+    handler for graphql docs
+    """
+    # Update the following to match your schema file naming
+    path = "./schema.graphql"
+
+    with open(path, "r", encoding="utf-8") as graphql_file:
+        schema = graphql_file.read()
+
+    try:
+        graphql.parse(schema)
+    except GraphQLSyntaxError as e:
+        raise Exception(path, str(e)) from e
+    return Response(
+        content=graphdoc.to_doc(
+            schema, templates_path="src/doc_templates", use_cache=False
+        ),
+        media_type="text/html",
+    )
+
+
 if __name__ == "__main__":
     uvicorn.run(
-        "main:app", host=settings.HOST, reload=True, port=settings.PORT, debug=False
+        "main:app",
+        host=settings.HOST,
+        reload=True,
+        port=settings.PORT,
+        debug=settings.DEBUG_MODE,
     )
