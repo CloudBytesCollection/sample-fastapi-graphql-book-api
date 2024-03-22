@@ -22,7 +22,7 @@ export.schema:
 	@strawberry export-schema src.graphql_api:schema > ./schema.graphql
 
 lint:
-	@pylint app tests
+	@poetry run pylint app tests
 
 format.check:
 	@black . --check
